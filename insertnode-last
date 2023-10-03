@@ -1,0 +1,62 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+struct node{
+    int data;
+    struct node *next;
+};
+void display(struct node **head);
+void insertnode(struct node **head);
+struct node* getnode();
+
+struct node* getnode(){
+    struct node *newnode;
+    newnode=malloc(sizeof(struct node));
+    if(newnode==NULL){
+        printf("memory not allocated");
+        exit(0);
+    }
+    newnode->next=NULL;
+    return newnode;
+}
+
+void insertnode(struct node **head){
+    struct node *newnode=getnode();
+    printf("enter the value of data\n");
+    scanf("%d",&newnode->data);
+
+    if(*head==NULL){
+        printf("insert node at first\n");
+        *head=newnode;
+
+    }
+    else{
+        struct node *temp;
+        temp=*head;
+        while(temp->next!=NULL){
+            temp=temp->next;
+        }
+        //temp points to last variable
+        temp->next=newnode;
+
+
+    }
+    }
+
+void display(struct node **head){
+    struct node *temp;
+    temp=*head;
+    while(temp!=NULL){
+        printf("%d\n",temp->data);
+        temp=temp->next;
+    }
+}
+
+int main(){
+    struct node *head=NULL;
+    while(1){
+            insertnode(&head);
+            display(&head);
+    }
+
+}
