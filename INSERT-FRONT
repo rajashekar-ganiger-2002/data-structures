@@ -1,0 +1,89 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+struct node{
+    int data;
+    struct node *next;
+};
+void display(struct node **head);
+void insertnode(struct node **head);
+struct node* getnode();
+void insertfront(struct node** head);
+
+struct node* getnode(){
+    struct node *newnode;
+    newnode=malloc(sizeof(struct node));
+    if(newnode==NULL){
+        printf("memory not allocated");
+        exit(0);
+    }
+    newnode->next=NULL;
+    return newnode;
+}
+
+void insertnode(struct node **head){
+    struct node *newnode=getnode();
+    printf("enter the value of data\n");
+    scanf("%d",&newnode->data);
+
+    if(*head==NULL){
+        printf("insert node at first\n");
+        *head=newnode;
+
+    }
+    else{
+        struct node *temp;
+        temp=*head;
+        while(temp->next!=NULL){
+            temp=temp->next;
+        }
+        //temp points to last variable
+        temp->next=newnode;
+
+
+    }
+}
+
+void display(struct node **head){
+    struct node *temp;
+    temp=*head;
+    while(temp!=NULL){
+        printf("%d\n",temp->data);
+        temp=temp->next;
+    }
+}
+
+void insertfront(struct node** head){
+    struct node* newnode=getnode();
+    printf("enter the value for data");
+    scanf("%d",&newnode->data);
+    newnode->next=*head;
+    *head=newnode;
+}
+
+
+int main(){
+    struct node *head=NULL;
+    int choice=0;
+    while(1){
+            printf("enter the choice\n");
+            printf("1 insertnode\n2 display\n3 insertfront\n");
+            scanf("%d",&choice);
+            switch(choice){
+                case 1:
+                        insertnode(&head);
+                        break;
+                case 2:
+                        display(&head);
+                        break;
+                case 3:
+                        insertfront(&head);
+                        break;
+
+                default :
+                        printf("invalid choice\n");
+            }
+
+    }
+
+}
